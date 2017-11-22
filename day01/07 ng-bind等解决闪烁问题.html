@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./libs/angular.min.js"></script>
+    <script>
+        var App = angular.module('app',[]);
+        App.controller('appcontroller',['$scope',function($scope){
+          $scope.username = 'cyx'
+          $scope.age =22;
+        }])
+    </script>
+</head>
+<body ng-app="app" ng-controller="appcontroller">
+        <!-- {{username}} -->
+      <!--
+            原则上来说，原始的插值表达式会出现闪烁问题
+            页面先出现{{username}} 然后被解析之后再出现宝马老赵
+        -->
+
+        <!-- 解决方式: -->
+        <!-- 绑定单个变量 -->
+        <p ng-bind="username"></p>
+        <!-- 绑定多个不太多的变量 -->
+        <p ng-bind-template="{{username}}===>{{age}}"></p>
+        <!--如果数据非常之复杂，不能把要获取的属性都写ng-bind-template="{{username}}===>{{age}}" -->
+        <!-- ng-cloak 指令 解决这个闪烁问题 这是一个无值指令
+        但是这个指令angular 经过测试数据较多时并不能解决闪烁问题，所以就是angular 的bug
+        -->
+        <p ng-cloak>{{username}}{{username}}{{username}}{{username}}{{username}}{{username}}{{username}}{{username}}</p>
+</body>
+</html>

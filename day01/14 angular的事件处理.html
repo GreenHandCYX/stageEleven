@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>angular 模板</title>
+            <script src="libs/angular.min.js"></script>
+            <script>
+                var App=angular.module("app",[]);
+                App.controller("appController",["$scope",function($scope){
+                    $scope.active=true;
+                    $scope.change=function(active){
+                        console.log(123)
+                    }
+                }]);
+        
+        
+            </script>
+        </head>
+        <body ng-app="app" ng-controller="appController">
+             <!--
+                    我们为元素添加事件，我们可以使用自带的onclick  onblur onfocus
+                 我们也可以使用angular 帮助我们封装的约束去编写事件
+                    ng-click 为当前元素添加点击
+                    ng-submit 提交
+                    ng-keyup
+                  
+                  注意: 1.假设使用ng- 添加的 事件，事件对应的函数必须绑定在当前视图关联的控制器
+               对应的模型上面
+                       2.即使不传值，调用时也必须加括号,这点不同于vue
+                   我可以在change 里面去添加一些参数
+             -->
+             <input type="button" value="按钮" ng-click="change()">
+        </body>
+        </html>
+</body>
+</html>

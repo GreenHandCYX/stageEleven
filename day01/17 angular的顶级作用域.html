@@ -1,0 +1,24 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>angular 模板</title>
+        <script src="libs/angular.min.js"></script>
+        <script>
+            var App=angular.module("app",[]);
+            App.controller("appController",["$scope",function($scope){
+    
+            }]);
+    
+    
+        </script>
+    </head>
+    <!--
+        ng-init rootScope 上面绑定公有数据
+        注意：数据的格式必须是key=value;key2=val2
+    每个指令的值具体传递什么样的参数，跟他内部的解析有关系.
+    -->
+    <body ng-app="app" ng-controller="appController" ng-init="username='cyx';age=22">
+            {{username}}
+            {{age}}
+    </body>
+    </html>

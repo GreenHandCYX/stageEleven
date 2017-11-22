@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+        App.controller('appController',['$scope',function($scope){
+
+        }])
+        //angular模块化时返回的对象提供了一个自定义指令的方法direactive
+        //第一个参数指指令的名称,第二个是一个匿名函数返回对指令的设置
+        App.directive('myMark',function(){
+            return {
+                replace:true,//是否替换原有的标签
+                restrict:'ECMA',//规定指令的使用方式ECMA
+                //(E:element元素,C:class类,M:mark注释,A:attribute属性)
+                template:'<h1>now</h1>'//替换内容
+            }
+        })
+        
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+     <!-- 1.在中元素使用 -->
+     <!-- 注意：驼峰命名时应用-隔开 -->
+     <my-mark></my-mark>
+
+     <!-- 2.在类中使用 -->
+     <div class="my-mark"></div>
+
+     <!-- 3.在注释中使用  注意:必须加directive:并且后面必须有空格-->
+     <!-- directive:my-mark  -->
+
+     <!-- 4.在属性中使用 -->
+     <div my-mark></div>
+</body>
+</html>

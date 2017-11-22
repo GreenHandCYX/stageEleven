@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Template • TodoMVC</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body ng-app="app">
+<section class="todoapp" ng-controller="todosController" >
+    <header class="header">
+        <h1>todos</h1>
+        <form ng-submit='add()' >
+            <input class="new-todo" ng-model='doname' placeholder="What needs to be done?"  autofocus>
+        </form>
+    </header>
+    <section class="main">
+        <input class="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul class="todo-list">
+            <li ng-repeat="item in todos">
+                <div class="view">
+                    <input class="toggle" ng-click="change($index)" type="checkbox" >
+                    <label>{{item}}</label>
+                    <!--$index 是一个隐式的变量，它记录的值是要遍历的当前数组的元素的索引值.-->
+                    <button class="destroy" ng-click="delete(todos,$index)"></button>
+                </div>
+                <input class="edit" value="Create a TodoMVC template">
+            </li>
+            <li><h5>已完成</h5></li>
+            <li class="completed" ng-repeat="ele in complete">
+                <div class="view">
+                    <input class="toggle" ng-checked="true" type="checkbox">
+                    <label>{{ele}}</label>
+                    <!-- 5：删除指定的已完成事项.-->
+                    <button class="destroy"  ng-click="delete(complete,$index)"></button>
+                </div>
+                <input class="edit" value="Create a TodoMVC template">
+            </li>
+        </ul>
+    </section>
+    <footer class="footer">
+        <span class="todo-count"><strong>{{todos.length}}</strong>未完成</span>
+        <button class="clear-completed" ng-click="clear()">Clear completed</button>
+    </footer>
+</section>
+<footer class="info">
+    <p>Double-click to edit a todo</p>
+    <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+    <p>Created by <a href="http://todomvc.com">you</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
+</body>
+<script src="../../libs/angular.min.js"></script>
+<script>
+        /*
+        * 功能：
+        *       1：添加一个待办事项
+        *       2：显示所有的待办事项
+        *       3：删除指定的待办事项
+        *       4：将待办事项修改成已完成
+        *       5：删除指定的已完成事项
+        *       6：清除所有的已完成事项
+        *       7：显示所有的未完成的事项的总数
+        * */
+        var App=angular.module("app",[]);
+
+       App.controller("todosController",["$scope",function($scope){
+           //未完成数组
+           $scope.todos = [];
+           //已完成数组
+           $scope.complete=[];
+            $scope.add = function(){
+                console.log(123)
+                $scope.todos.push($scope.doname)
+                $scope.doname=''
+            }
+            $scope.change = function(index){
+                //删去未完成数组中的该值并放入已完成数组
+                var taskName = $scope.todos.splice(index,1);
+                $scope.complete.push(taskName);
+
+            }
+            $scope.delete = function(array,index){
+                array.splice(index,1)
+            }
+            $scope.clear = function(){
+                $scope.complete = [];
+            }
+       }]);
+</script>
+
+</html>

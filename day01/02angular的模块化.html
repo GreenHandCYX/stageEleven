@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        /*
+         * 特性：模块化，双向数据绑定，指令，过滤器，服务，依赖注入
+         * */
+        /*
+         * 模块化：
+         *       1：我们开发代码就是开发应用，页面是应用的一个部分
+         *       2：我们怎么去定义一个应用
+         *       3：angular 定义应用 ng-app 指定应用名称
+         *       4: 应用是由angular 以模块化的方式进行管理.
+         *       5: 怎么去管理，angular 提供了一个对象 angular 对象 有一个方法 module() 对应用进行初始化
+         * */
+        /*
+         * 1:需要实例化的应用的名称
+         * 2：需要依赖的模块，这里传入的是一个数组，如果不需要依赖，则传递空数组.
+         * */
+        var App=angular.module("app",[]);
+        /*
+         * 我们就开始编写我们的业务逻辑代码，业务逻辑代码为了方便去管理，这边就需要用到设计模式.
+         * mvc 设计模式 ,先大概在过一下设计模式，然后在angular 里面怎么去实现mvc 设计模式的结构.
+         *
+         * mvc
+         *     m model 数据相关的操作 (增删改查数据的api)
+         *     v view  视图 显示数据的部分（html 标签）
+         *     c controller 控制器 用来关联视图与model 的衔接 （数据在那个视图上面进行展示）
+         * */
+         /*
+         * view 层   model 层，两者怎么去进行关联
+         * view 页面的标签部分
+         * 使用控制器关联视图 ng-controller 指令去关联对应的控制器
+         * 控制器进行初始化，去衔接对应的model
+         * controller 方法，用来将视图跟model 进行关联的.
+         * */
+         App.controller("appController",["$scope",function($scope){
+                //$scope 理解成model
+         }]);
+        /*
+        *angular 里面简单的mvc 设计结构.
+        *
+        * */
+
+    </script>
+</head>
+<body ng-controller="appController">
+
+</body>
+</html>

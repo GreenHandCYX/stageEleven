@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="libs/angular.min.js"></script>
+    <!--
+        1:定义应用
+        2:初始化应用，将应用以模块化的方式进行管理
+        3:mvc 设计模式
+    -->
+    <script>
+          var App=angular.module("itcastApp",[]);
+
+          //数据绑定
+          App.controller("appController",["$scope",function($scope){
+                /*
+                * 实现view 的数据流向到model
+                * view 是视图 数据的数据用户输入的
+                * view 的数据到model （在用户的输入框输入数据，通过$scope 可以获取到）
+                * 使用一个指令  ng-model 指令
+                *   将用户在输入框的输入的数据绑定在$scope 上面.
+                *   用户在输入框输入数据input 框，实际上是想 $scope 绑定数据  $scope msg 的属性，它的值是用户输入的这个值.
+                *   不断的去输入，不断去更改$scope 上面的值
+                 *   $scope 上面的值发生改变，angular 会自动更新视图（vue.js）
+                 *   双向数据绑定
+                 *   (mvvm 模型的数据可以流向到视图，视图的数据也可以流向到model)
+                 *   mvvm 与 mvc 的区别是什么
+                 *   mvc 只能实现model 的数据流向到视图，单向的数据传递
+                 *   mvvm  能够实现model 的数据流向到视图，也能实现视图的数据流向到model 双向数据传递
+                 * */
+          }]);
+
+    </script>
+</head>
+<body ng-app="itcastApp" ng-controller="appController">
+    <input type="text" ng-model="msg">
+    <p>{{msg}}</p>
+</body>
+</html>

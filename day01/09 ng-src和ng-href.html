@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="appController">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <link rel="stylesheet" ng-href="{{href}}">
+    <script>
+        var App=angular.module("app",[]);
+        App.controller("appController",["$scope",function($scope){
+                $scope.src="images/author.jpg";
+                $scope.href="css/main.css";
+        }]);
+    </script>
+</head>
+<body  >
+        <!-- 默认情况,会请求两次-->
+        <!-- <img src="{{src}}" alt=""> -->
+        <!--
+                因为浏览器先解析   <img src="{{src}}" alt=""> 把{{src}} 当成一个普通的字符串处理
+                src="{{src}}" 会发送两次请求.
+                最后angular 进行解析
+                我们就需要使用 ng-src 去 获取数据
+                ng-href 指令 引入样式文件
+                ng-href 指令 与 ng-src 都是用来解决发送两次请求的问题的
+
+        -->
+        <img ng-src="{{src}}"   alt="">
+
+        <li>hello world !</li>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./libs/angular.min.js"></script>
+    <script>
+        var App = angular.module('app',[])
+        App.controller('appController',['$scope',function($scope){
+            $scope.price = 11.111
+            $scope.birth = new Date
+            $scope.name = 'cyx'
+            $scope.list=[{username:"柴益新",age:21},{username:"老段",age:39},{"username":"汪磊",age:21}]
+            $scope.numbers=[11,22,44,21,31];
+        }])
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    <!-- 1.处理货币 -->
+    <!-- 有两个参数：第一个参数指货币格式，第二个参数指小数的精确度，不足补0 -->
+    {{price | currency:'&yen;':4}}
+    <br>
+    <!-- 2.处理时间 参数为时间格式(较为随意)-->
+    {{birth | date:'yyyy-MM-dd HH小时mm分钟ss秒'}}
+    <br>
+    <!-- 3.截取字符串 -->
+    <!-- 
+        第一个参数，截取几位
+        第二个参数，从第几个索引值开始
+     -->
+    {{name | limitTo:1:0}}
+     <br>
+     <!-- 4.在给定数组中选择满足条件的一个子集组成一个新数组，
+        其条件可以是一个字符串、对象、函数 
+        注:若是一个对象则后面必须添加一个空格 
+    -->
+    {{list | filter:{age:21} }}
+    <br>
+    <!-- 5.排序 -->
+    <!-- -默认是升序
+    orderBy 方法接收两个参数
+            1:第一个参数排序依据的关键字段
+            2: true（降序）/false(升序) -->
+    {{numbers | orderBy:'':true}}
+</body>
+</html>

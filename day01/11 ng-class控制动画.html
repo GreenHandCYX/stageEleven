@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <style>
+
+            .active{
+                    width: 10px;
+                    height: 10px;
+                    background-color: blue;
+                    animation: change 1s linear ;
+            }
+
+            @keyframes change {
+                    0%{
+                         width: 100px;
+                    }
+                    50%{
+                         height: 300px;
+                    }
+                    100%{
+                         background-color: green;
+                    }
+            }
+
+    </style>
+    <script>
+        var App=angular.module("app",[]);
+        App.controller("appController",["$scope",function($scope){
+               $scope.isActive=false;
+               $scope.change=function(){
+                    $scope.isActive=!$scope.isActive;
+               }
+        }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+        <div ng-class="{active:isActive}"></div>
+        <button ng-click="change()">按钮</button>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        /*
+        * angular 给我们提供了双向数据绑定，不用解析数据，不用自己从页面上面获取数据.
+        * 操作dom ，angular 内部去进行操作了
+        * */
+        var App=angular.module("app",[]);
+        App.controller("appController",["$scope",function($scope){
+
+        }]);
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+        <!--
+        这个指令底层肯定是对应一个方法，这个方法用来控制这个元素是否显示.
+        对应底层是angular 的方法，然后它里面对应的是dom 操作
+        -->
+        <p ng-show="true">我是老赵</p>
+        <!--用来控制元素是否隐藏-->
+        <p ng-hide="true">我是鱼儿</p>
+        <!--这个也是用来控制元素是否显示以及隐藏-->
+        <p ng-if="false">我是花无缺</p>
+        <!--他们的区别
+        ng-show   ng-hide 底层是修改当前元素的display 属性样式
+        ng-if 使用用来是否删除当前元素
+        -->
+</body>
+</html>

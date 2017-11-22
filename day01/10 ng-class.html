@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <style>
+            .active{
+                  width: 200px;
+                  height: 200px;
+                  background-color: pink;
+            }
+    </style>
+
+    <script>
+        var App=angular.module("app",[]);
+        App.controller("appController",["$scope",function($scope){
+        }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+      <!--
+           ng-class用来控制是否添加某个类
+           有两种传值方式:
+           1.字符串,需要传入的active是一个字符串
+           2.对象
+      -->
+      <div ng-class="'active'"></div>
+      <br>
+      <div ng-class="{active:true}"></div>
+      </div>
+</body>
+</html>

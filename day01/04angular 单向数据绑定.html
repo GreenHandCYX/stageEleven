@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        //mvc:数据流向控制层再流向视图层
+        //model 的数据----> view 单项的数据绑定
+        //标签内的ng-app用于限制angular应用的边界
+        //ng-controller用于将视图与控制器进行关联
+
+
+        //angular的module指angular以模块的方式组织代码
+
+        //第一个参数为作用模块，第二个参数为依赖模块
+        var App = angular.module('app',[])
+        //初始化控制器同时与模型层$scope进行关联
+        App.controller('appController',['$scope',function($scope){
+            $scope.msg = 'haha'
+        }])
+    </script>
+</head>
+<body ng-controller="appController">
+    {{msg}}
+</body>
+</html>

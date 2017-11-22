@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+        App.controller("appController",["$scope",function($scope){
+                $scope.username="老赵的女朋友还在娘家养着";
+        }]);
+        App.controller("appController1",["$scope",function($scope){
+                //$scope.username="老赵的鱼儿去世了";
+        }]);
+        App.controller("appController2",["$scope",function($scope){
+                $scope.username="老赵的宝马";
+        }]);
+
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+        <!--
+                通常AngularJS中应用（App）是由若干个视图（View）组合成而成的 ，
+                而视图（View）又都是HTML元素，并且HTML元素是可以互相嵌套的
+                另一方面视图都隶属于某个控制器（Controller），进而控制器之间也必然会产生嵌套关系。
+
+
+                $scope  上面是绑定了数据的，限制了数据的访问范围
+
+                我们把最顶层ng-controller 关联的$scope 叫做根作用域
+                根作用域的数据在应用的所有范围内都会被共享，以后全局的数据就绑定在根作用域上面.
+        -->
+        {{username}}
+        <div ng-controller="appController1">
+                <p>{{username}}</p>
+                <div ng-controller="appController2">
+                    <p>{{username}}</p>
+                </div>
+        </div>
+</body>
+</html>

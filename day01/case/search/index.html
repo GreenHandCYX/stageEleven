@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <!--引入bootstrap 的样式文件-->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+    <style>
+         .box{
+              width: 700px;
+              margin: 100px auto;
+         }
+    </style>
+    <script src="../../libs/angular.min.js"></script>
+    <script>
+        var App = angular.module('app',[]);
+        App.controller('appController',['$scope','$filter',function($scope,$filter){
+            //声明一个全局变量存储数据，避免直接绑定到$scope对$scope修改时造成的数据丢失
+            var list = [
+                    {
+                         username:"老赵",
+                         sex:"男",
+                         weixin:"11",
+                         momo:"99991114",
+                         tantan:"88811122",
+                         baihe:"老布头",
+                         youyuan:"老头"
+                    },
+                    {
+                        username:"刘小强",
+                        sex:"男",
+                        weixin:"33",
+                        momo:"99991111",
+                        tantan:"88811122",
+                        baihe:"西门庆",
+                        youyuan:"西门庆"
+                    },
+                    {
+                        username:"梅恩豪",
+                        sex:"男",
+                        weixin:"66",
+                        momo:"99991112",
+                        tantan:"88811122",
+                        baihe:"没毛病",
+                        youyuan:"没毛病"
+                    },
+                    {
+                        username:"朱武",
+                        sex:"男",
+                        weixin:"88",
+                        momo:"99991111",
+                        tantan:"88811123",
+                        baihe:"小旋风",
+                        youyuan:"小旋风"
+                    }
+                ];
+            $scope.persons=list;
+            $scope.search=function(){
+                //默认不输入应该也在原先的基础上查找
+                $scope.persons=list;
+                var func = $filter('filter');
+                //搜索条件
+                var obj={};
+                obj[$scope.fieldName]=$scope.fieldVal;
+                $scope.persons = func($scope.persons,obj) 
+            }
+            //定义倒序或正序
+            var isSort = false;//默认升序
+            $scope.order=function(keyName){
+                var oFun = $filter('orderBy');
+                isSort = !isSort;
+               $scope.persons = oFun($scope.persons,keyName,isSort)
+            }
+        }])
+    </script>
+</head>
+<body >
+    <div class="box" ng-app="app" ng-controller="appController">
+
+        <select  class="form-control" ng-model='fieldName' style="width: 200px;float: left;">
+            <option value="username">姓名</option>
+            <option value="sex">性别</option>
+            <!--
+              原因，为option 添加了一个ng-selected 的一个属性之后，select 里面的数据没有办法流向到model
+            -->
+            <option value="weixin">微信</option>
+            <option value="momo" selected>陌陌</option>
+            <option value="tantan">探探</option>
+            <option value="baihe">百合网</option>
+            <option value="youyuan">有缘网</option>
+        </select>
+        <input type="text" style="width: 200px;float: left;" class="form-control" ng-model='fieldVal' ng-keyup="search()">
+        <!--画一个表格-->
+        <table class="table table-bordered">
+            <tr>
+                <td ng-click="order('username')">姓名</td>
+                <td ng-click="order('sex')">性别</td>
+                <td ng-click="order('weixin')">微信</td>
+                <td ng-click="order('momo')">陌陌</td>
+                <td ng-click="order('tantan')">探探</td>
+                <td ng-click="order('baihe')">百合网</td>
+                <td ng-click="order('youyuan')">珍爱网</td>
+            </tr>
+            <tr ng-repeat="item in persons">
+                <td>{{item.username}}</td>
+                <td>{{item.sex}}</td>
+                <td>{{item.weixin}}</td>
+                <td>{{item.momo}}</td>
+                <td>{{item.tantan}}</td>
+                <td>{{item.baihe}}</td>
+                <td>{{item.youyuan}}</td>
+            </tr>
+        </table>
+    </div>
