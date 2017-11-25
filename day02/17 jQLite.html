@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="libs/jquery-1.12.4.js"></script>
+    <script src="libs/angular.min.js"></script>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+
+</head>
+<body >
+
+<div class="box"></div>
+<script>
+    //这个是一个dom 对象
+    var dom = document.querySelector('.box');
+    //利用angular对象的element方法可以将一个dom对象转为JQLite对象
+    var jQLite = angular.element(dom)
+    //这样就具有jQLite对象的方法了
+    jQLite.css("background","green");
+    //但是因为jQLite只是一个简版的jquery，所以没有animate等方法
+    //需要在引入angular.js前先行引入jquery，这时jQLite就变成了一个完成的jquery 对象
+    jQLite.animate({"marginLeft":"200"},1000);
+    //一般在pc 端才会这样结合去使用.
+
+
+    //移动端通常按以下方式处理
+    //angular+原生js 配合css3 去完成动画操作.
+    //angular 里面执行动画  通过指令控制是否添加类名，通过类名去调用css3动画.
+    
+</script>
+</body>
+</html>

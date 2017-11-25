@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用某个服务也需要注入该模块
+          App.controller("appController",["$scope",'$http',function($scope,$http){
+                $http({
+                    method:'jsonp',
+                    url:'https://sug.so.360.cn/suggest?encodein=utf-8&encodeout=utf-8&format=json&fields=word&word=1',
+                    //需要发送一个请求参数callback以返回该函数的执行
+                    params:{
+                        callback:'JSON_CALLBACK'
+                    }
+                }).success(function(data,status,info,request){
+                   console.log(data)
+                }).error(function(){
+                    //出错的时候调用
+                })  
+          }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+
+</body>
+</html>

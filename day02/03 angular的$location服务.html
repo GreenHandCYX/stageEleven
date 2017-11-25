@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用某个服务也需要注入该模块
+          App.controller("appController",["$scope",'$location',function($scope,$location){
+            //$location的api
+            //获取浏览器地址的相关信息的: 协议，主机地址，端口，绝对地址，请求参数，锚点值
+            console.log($location);
+            console.log($location.protocol());//返回地址栏的协议 
+            console.log($location.port()); //返回端口
+            console.log($location.search())//返回地址栏?后的请求参数，第一个# 号后面的参数.
+            console.log($location.absUrl());//返回绝对地址
+            console.log($location.hash());//返回锚点值，获取的是第二个# 后面的内容.
+
+          
+          }]);
+
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+
+</body>
+</html>

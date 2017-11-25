@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用某个服务也需要注入该模块
+          App.controller("appController",["$scope",'$log',function($scope,$log){
+                $log.log("打印的");
+                $log.info("消息");
+                $log.warn("警告");
+                $log.error("错误");
+                $log.debug("调试");//chrome浏览器有兼容问题，一般不显示
+          }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+
+</body>
+</html>

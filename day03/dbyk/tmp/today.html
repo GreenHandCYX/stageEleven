@@ -1,0 +1,35 @@
+<div class="item">
+    <div class="mark" ng-show="loaded">{{date}}</div>
+    <ul class="posts large">
+        <!--
+                解析数据，解析文章，文章有三种类型的数据
+                        1：纯文字的  display_style :10001
+                        2：文字+图片的 display_style :10002
+                        3：纯图片的 display_style :10003
+        -->
+       
+        <li ng-repeat="item in data.posts">
+            <span href="javascript:;" ng-if="item.column.name" class="tag">{{item.column.name}}</span>
+            <div class="cont">
+                <h3>{{item.title}}</h3>
+
+                <div class="brief">
+                    <!--纯文字的数据-->
+                    <p class="only" ng-if="item.display_style!=10003">
+                        {{item.abstract}}
+                    </p>
+
+                    <!--文字加图片的-->
+                    <div class="thumb" ng-if="item.display_style==10002">
+                        <img ng-src="{{item.thumbs[0].small.url}}"   alt="">
+                    </div>
+
+                    <!--纯图片的-->
+                    <div class="gallery" ng-if="item.display_style==10003">
+                        <img ng-src="{{item.thumbs[0].small.url}}"   alt="">
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //angular中使用某个功能模块则必须注入
+          //行内式注入:
+          //controller第二个参数为一个数组,并且注入的模块的形参只需保证顺序即可
+          App.controller("appController",["$scope",function($s){
+            $s.msg = 'ss'
+          }]);
+
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    {{msg}}
+</body>
+</html>

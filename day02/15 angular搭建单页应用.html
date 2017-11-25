@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <!-- 引入路由模块 -->
+    <script src="libs/angular-route.js"></script>
+    <script>
+       /*
+         * 改造一个单页面应用
+         *      1: 导航的位置 锚点
+         *      2：内容显示的区域
+         *      3：配置路由
+         * */
+
+
+          //1.注入该应用依赖的路由模块
+          var App=angular.module("app",['ngRoute']);
+          //2.通过App.config配置路由提供者$routeProvider从而配置路由
+          App.config(["$routeProvider",function($routeProvider){
+              //通过when处理路由,操作后返回$routeProvider,所以可以链式调用
+              //通过otherwise处理when中没有的选项
+            $routeProvider.when('/home',{
+                //设置一个简单的模板,有这个会覆盖templateUrl
+                // template:"<h1>home</h1>",
+                //指定要调转的视图
+                templateUrl:'./template/home.html'
+            }).when('/category',{
+                // template:"<h1>category</h1>",
+                templateUrl:'./template/category.html',
+                controller:'cateController'
+            }).when('/cart',{
+                // template:"<h1>cart</h1>",
+                templateUrl:'./template/cart.html',
+                //需要给跳转到的页面渲染数据或调用方法，则需给跳转的页面设置controller
+                //相当于在cart视图上设置ng-controller，让对应视图关联到对应控制器上
+                controller:'cartController'
+            }).when('/mine',{
+                // template:"<h1>mine</h1>",
+                templateUrl:'./template/mime.html'
+            }).otherwise({
+                //重定向某个路由
+                redirectTo:'/home'
+            })
+          }])
+
+
+          //将当前主页面的数据关联到指定控制器上，以将请求的数据或方法传给对应视图上
+          App.controller('cartController',["$scope","$http",function($scope,$http){
+                //这里只是模拟
+                console.log("这个是购物车的");
+                $scope.cartlist=[
+                            "袜子",
+                            "鞋子",
+                            "帽子",
+                            "衣服"
+                ]
+                $scope.delete=function(id){
+                    console.log(id);
+                }
+          }])
+
+
+          App.controller("cateController",["$scope","$http",function($scope,$http){
+                console.log("这个是分类");
+            }])
+
+
+
+    </script>
+</head>
+<body ng-app="app" >
+    <ul>
+        <li><a href="#/home">首页</a></li>
+        <li><a href="#/category">分类</a></li>
+        <li><a href="#/cart">购物车</a></li>
+        <li><a href="#/mine">我的</a></li>
+    </ul>
+    <!-- 显示路由切换的数据 -->
+    <ng-view>
+
+    </ng-view>
+</body>
+</html>

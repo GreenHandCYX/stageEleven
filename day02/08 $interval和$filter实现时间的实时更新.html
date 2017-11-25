@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用某个服务也需要注入该模块
+          App.controller("appController",["$scope",'$interval',function($scope,$interval){
+              $scope.date = new Date();
+              $interval(function(){
+                $scope.date = new Date();
+              },1000)
+          }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    {{date | date:'yyyy-MM-dd hh:mm:ss'}}
+</body>
+</html>

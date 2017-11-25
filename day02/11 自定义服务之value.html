@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用App.value来定义一个常量
+          //参数分别为常量名和值
+          App.value('name','cyx')
+          App.value('age',18)
+
+        //同样使用该服务需要注入
+          App.controller("appController",["$scope","name","age",function($scope,name,age){
+             console.log(name)
+             console.log(age)
+          }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    {{str}}
+</body>
+</html>

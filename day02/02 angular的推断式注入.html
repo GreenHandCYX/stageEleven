@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //angular中使用某个功能模块则必须注入
+          //推断式注入:
+          //controller第二个参数为一个函数,模块以函数的参数注入，所以必须与所用的模块名一致
+
+
+          // 如果我使用webpack，它可以把这些js 代码进行压缩处理 形参就会变成简写形式
+          // 推断式注入，angular 就找不到对应的模块，就会报错.
+          App.controller("appController",function($scope){
+            $scope.msg = 'ss'
+          });
+
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    {{msg}}
+</body>
+</html>

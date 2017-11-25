@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/angular-route.js"></script>
+    <script>
+      
+        var App=angular.module("app",["ngRoute"]);
+      
+        App.config(["$routeProvider",function($routeProvider){
+         
+            $routeProvider.when("/home",{
+                   templateUrl:"template/home.html",
+                   controller:"homeController"
+            }).when("/category/:categoryId/:page/home",{
+                  templateUrl:"template/category.html",
+                  controller:"categoryController"
+            }).when("/cart",{
+                  templateUrl:"template/cart.html"
+            }).when("/mime",{
+                  templateUrl:"template/mime.html"
+            }).otherwise({
+                 redirectTo:"/home"
+            })
+        }]);
+
+        //去接收数据
+        App.controller("categoryController",["$scope","$routeParams",function($scope,$routeParams){
+                 //通过$routeParams接收/11/1 对应/:categoryId/:page rest形式的路由参数
+                 //,$routeParams也可以接收?后的参数
+                console.log($routeParams);//{categoryId: "11", page: "1"}
+        }])
+        App.controller("homeController",["$scope","$location",function($scope,$location){
+                 //通过$location.search()接收?后的参数
+                console.log($location.search());//{num:1}
+        }])
+
+    </script>
+</head>
+<body ng-app="app">
+<ul>
+    <li><a href="#/home?num=1">首页</a></li>
+    <!--查询分类 发送参数，参数名，参数值 -->
+    <li><a href="#/category/11/1/home">护肤品</a></li>
+    <li><a href="#/cart">购物车</a></li>
+    <li><a href="#/mine">我的</a></li>
+</ul>
+<!--使用一个指令  -->
+<div  ng-view>
+
+</div>
+</body>
+</html>

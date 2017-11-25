@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+        //通过App.run单独运行一个模块(也就是不需要挂载到controller方法上)
+        //注意参数为一个数组，指模块的注入
+          App.run(['$http',"$rootScope",function($http,$rootScope){
+            $http({
+                methods:'get',
+                url:'./api/angularget.php',
+                params:{
+                    user:'cyx'
+                }
+            }).success(function(data){
+                //因为没有controller所以没办法挂载到其对应的$scope上
+                //angular应用提供了一个顶级作用域$rootScope可以提供数据共享,相当于在页面内使用ng-init="username='cyx';age=22"
+                $rootScope.res = data
+            })
+          }])
+    </script>
+</head>
+<body ng-app="app" >
+    {{res}}
+</body>
+</html>

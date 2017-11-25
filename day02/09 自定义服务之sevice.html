@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用App.service来定义一个服务
+          //第一个参数为服务名,第二个参数为服务的功能，
+          //通过this绑定该服务的一些方法,本来这里this应该指向window,但是service内部调用call和applay将this指向当前服务
+        App.service('myService',function(){
+            this.getCurrentTime=function(){
+                     console.log("cyx");
+            }
+            this.getCurrentTimeByStyle=function(arg1){
+                console.log(arg1);
+            }
+        })
+
+        //同样使用该服务需要注入
+          App.controller("appController",["$scope","myService",function($scope,myService){
+                myService.getCurrentTime()
+                myService.getCurrentTimeByStyle(111)
+          }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- 使用meta 标签，阻止浏览器发送 referer 请求头以解除防盗链-->
+    <meta name="referrer" content="never">
+	<title>豆瓣一刻</title>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./less/main.css">
+	<style>
+	  /*解决闪烁问题*/
+	  [ng-cloak]{
+		display: none;
+   }
+	</style>
+</head>
+<body>
+	<div ng-app="app" class="viewport">
+		<!-- 侧边导航 ng-class="{collapse:collapsed}"-->
+		<!-- 控制显示或隐藏 -->
+		<div class="navs" ng-class="{collapse:collapsed}" ng-controller="navsController">
+			<dl>
+				<dt class="login">
+					<div class="avatar">
+						<img src="./images/avatar.png" alt="">
+					</div>
+					<span>登录</span>
+				</dt>
+				<dd ng-repeat="nav in navs" ng-click="toggle()">
+					<a href="#{{nav.link}}" class="{{nav.icon}}">
+						<span>{{nav.text}}</span>
+					</a>
+				</dd>
+			</dl>
+			<div class="extra">
+				<a href="javascript:;" class="icon-image">夜晚</a>
+				<a href="javascript:;" class="icon-download">离线</a>
+			</div>
+		</div>
+		<!--版心-->
+		<div class="container">
+			<!-- 头部 -->
+			<div class="header" ng-class="{collapse:collapsed}">
+				<a href="javascript:;" class="menu icon-menu" ng-click="toggle()"></a>
+				<h2 ng-cloak>{{title}}</h2>
+				<a href="javascript:;" class="search icon-search"></a>
+			</div>
+			<!-- 主体 -->
+			<div class="body" ng-class="{collapse:collapsed}" >
+				<!--还需要做一个loading 图片-->
+				<img src="./images/loading.gif" ng-hide="loaded" style="margin: 5px auto;width: 24px;"   alt="">
+				
+				
+				<!--放置切换的内容的区域 -->
+				<div ng-view>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--引入核心文件-->
+	<script src="libs/angular.min.js"></script>
+	<script src="libs/angular-route.js"></script>
+	<!--自己组织angular js  代码-->
+	<!-- 减少缓存 -->
+	<script>
+		var str = "<script type='text/javascript' src='js/index.js?time="+new Date()+"'><\/script>"+
+				  "<script type='text/javascript' src='js/today.js?time="+new Date()+"'><\/script>"+
+				  "<script type='text/javascript' src='js/older.js?time="+new Date()+"'><\/script>"+
+				  "<script type='text/javascript' src='js/author.js?time="+new Date()+"'><\/script>";
+		document.write(str)
+	</script>
+
+</body>
+</html>

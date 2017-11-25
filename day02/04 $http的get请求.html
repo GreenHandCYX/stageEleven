@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用某个服务也需要注入该模块
+          App.controller("appController",["$scope",'$http',function($scope,$http){
+                $http({
+                    method:'get',
+                    url:'./api/angularget.php',
+                    params:{
+                        user:'cyx'
+                    }
+                }).success(function(data,status,info,request){
+                    //data指请求的服务端发来的消息
+                    console.log(data)
+                    //status指服务器响应回来的状态码200
+                    console.log(status)
+                    //info返回一个function,调用得到响应的相关信息
+                    console.log(info())
+                    //request返回一个function。调用得到请求的相关信息
+                    console.log(request)
+                }).error(function(){
+                    //出错的时候调用
+                })
+          
+          }]);
+
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+
+        //通过config 去配置(参数必须是一个数组)，注入对应服务的服务提供者
+       
+
+        App.config(['$filterProvider',function($filterProvider){
+            $filterProvider.register('myFilter',function(){
+                //将新增的过滤器挂载到内置$filter上
+                return function (arg,arg1) {
+                        //arg指传入的值
+                        return arg+arg1;
+                    }
+                
+            })
+        }])
+   
+       
+        App.controller("appController",["$scope","$filter",function($scope,$filter){
+                $scope.num = 12;
+                $scope.res = $filter('myFilter')($scope.num,'cyx');
+        }]);
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    {{res}}
+</body>
+</html>

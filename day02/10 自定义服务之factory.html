@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+          var App=angular.module("app",[]);
+          //使用App.factory来定义一个服务
+          //第一个参数为服务名,第二个参数为服务的功能，
+          //以工厂模式返回该服务的方法所组成的对象
+        App.service('myService',function(){
+            return {
+                reverseStr:function(str){
+                        return str;
+                }
+            }
+        })
+
+        //同样使用该服务需要注入
+          App.controller("appController",["$scope","myService",function($scope,myService){
+              $scope.str = myService.reverseStr('cyx')
+          }]);
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+    {{str}}
+</body>
+</html>
